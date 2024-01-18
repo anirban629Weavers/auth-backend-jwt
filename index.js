@@ -35,16 +35,17 @@ app.post("/api/v1/auth/refresh-token", (req, res) => {
       { id: payload.id, name: payload.name, email: payload.email },
       refreshExpiry
     );
-
     res.json({ accessToken, refreshToken: refreshToken_ });
   } catch (error) {
-    console.log("triggered");
+    console.log(error);
     return res.status(403).json({ error: "Refresh token expired" });
   }
 });
 
-app.get("/protectedpost", protect, (req, res) => {
-  console.log("r");
+// @desc    Refresh Access Token
+// @route   GET /api/v1/protected/products
+// @access  Public
+app.get("/api/v1/protected/products", protect, (req, res) => {
   res.json(products);
 });
 
